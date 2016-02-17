@@ -41,6 +41,17 @@ public struct ImageOptions: Equatable {
     }
 
     // MARK: - Adjustment Properties
+    
+    /**
+    Adds ellipse mask
+    
+    - seealso:
+    [Imgix API Reference](https://docs.imgix.com/apis/url/mask)
+    */
+    public var mask: Bool = false
+    
+    
+    // MARK: - Adjustment Properties
 
     /**
      Adjusts the brightness of the image.
@@ -329,7 +340,6 @@ public struct ImageOptions: Equatable {
     */
     public var backgroundColor: HexadecimalColorStringConvertable?
 
-
     // MARK: - Initializers
 
     public init(format: Format? = nil, width: CGFloat? = nil, height: CGFloat? = nil, scale: CGFloat? = nil, fit: FitMode? = nil, crop: [CropMode]? = nil) {
@@ -444,6 +454,10 @@ public struct ImageOptions: Equatable {
 
         if let value = colorQuantization {
             items.append(NSURLQueryItem(name: "colorquant", value: String(value)))
+        }
+        
+        if mask {
+            items.append(NSURLQueryItem(name: "mask", value: "ellipse"))
         }
 
         // Background Properties
